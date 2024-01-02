@@ -1,20 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NativeWindStyleSheet } from "nativewind";
+import { Provider } from "react-redux";
+import Store from "./context/store";
+import "./locale/i18n";
+import screens from "./screens";
+import { SPLASH_SCREEN } from "./screens/screens";
 
-export default function App() {
+NativeWindStyleSheet.setOutput({
+  default: "native",
+});
+
+const Stack = createNativeStackNavigator();
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Provider store={Store}>
+        <Stack.Navigator
+          screenOptions={{ headerShown: false }}
+          initialRouteName={SPLASH_SCREEN}>
+          {screens?.map((screen) => (
+            <Stack.Screen
+              key={screen.name}
+              name={screen.name}
+              component={screen.component}
+            />
+          ))}
+        </Stack.Navigator>
+      </Provider>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;

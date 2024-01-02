@@ -1,0 +1,17 @@
+{
+  "wellcome": "Welcome Back!",
+  "signin": "Sign In",
+  "signin_question": "Don't have an account?",
+  "create_here": "Create Here",
+
+  "join": "Join with us!",
+  "signup": "Sign Up",
+  "signup_question": "Have an account?",
+  "login_here": "Login Here",
+
+  "form": {
+    "email": "Email",
+    "password": "Password",
+    "fullname": "Full name"
+  }
+}
