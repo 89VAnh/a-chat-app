@@ -34,7 +34,7 @@ import { useSelector } from "react-redux";
 import { db } from "../config/firebase.config";
 
 import EmojiPicker, { EmojiType } from "rn-emoji-keyboard";
-import PopupMenu from "../components/PopupMenu";
+import ChatRoomModal from "../components/ChatRoomModal";
 import { convertTimeStamp } from "../utils/convertTimeStamp";
 
 export default function ChatScreen({ route }: { route: any }) {
@@ -80,7 +80,9 @@ export default function ChatScreen({ route }: { route: any }) {
   };
 
   useLayoutEffect(() => {
-    scrollViewRef.current?.scrollToEnd({ animated: true });
+    setTimeout(() => {
+      scrollViewRef.current?.scrollToEnd({ animated: true });
+    }, 800);
   });
 
   const updateLastMessage = async (message: any) => {
@@ -147,11 +149,11 @@ export default function ChatScreen({ route }: { route: any }) {
               <FontAwesome5 name='phone' size={24} color='#fbfbfb' />
             </TouchableOpacity>
 
-            <PopupMenu
-              options={[1, 2, 3]}
-              onSelect={(value: any) => console.log(value)}>
-              <Entypo name='dots-three-vertical' size={24} color='#fbfbfb' />
-            </PopupMenu>
+            <TouchableOpacity className='mr-3'>
+              <ChatRoomModal chatId={room._id}>
+                <FontAwesome5 name='ellipsis-v' size={24} color='#fbfbfb' />
+              </ChatRoomModal>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -159,7 +161,7 @@ export default function ChatScreen({ route }: { route: any }) {
         <KeyboardAvoidingView
           className='flex-1'
           behavior={Platform.OS === "ios" ? "padding" : "height"}
-          keyboardVerticalOffset={160}>
+          keyboardVerticalOffset={150}>
           <ScrollView ref={scrollViewRef}>
             {isLoading ? (
               <View className='flex items-center justify-center w-full'>
@@ -179,10 +181,6 @@ export default function ChatScreen({ route }: { route: any }) {
                             {message.message}
                           </Text>
                         </View>
-                        {/* <Image
-                          source={{ uri: message?.user?.profilePic }}
-                          className='w-8 h-8 rounded-full'
-                        /> */}
                         <View className='self-end'>
                           {message?.timeStamp?.seconds && (
                             <Text className='text-gray-400'>
@@ -235,12 +233,17 @@ export default function ChatScreen({ route }: { route: any }) {
                 onClose={() => setIsOpen(false)}
               />
               <TextInput
-                className='flex-1 h-8 text-base font-semibold text-primaryText'
+                className='flex-1 text-[16px] font-semibold  text-primaryText'
                 placeholder='Type here ...'
                 placeholderTextColor='#999'
                 value={message}
                 onChangeText={setMessage}
                 ref={textInputRef}
+                onFocus={() =>
+                  setTimeout(() => {
+                    scrollViewRef.current?.scrollToEnd({ animated: true });
+                  }, 800)
+                }
               />
 
               <TouchableOpacity>

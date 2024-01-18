@@ -78,7 +78,7 @@ export default function AddToChatScreen() {
             <Ionicons name='chatbubbles' size={24} color='#777' />
             {/* textInput */}
             <TextInput
-              className='flex-1 w-full h-12 -mt-3 text-lg text-primaryText'
+              className='flex-1 w-full h-12 -mt-2 text-lg text-primaryText'
               placeholder='Create a chat'
               placeholderTextColor='#999'
               value={addChat}

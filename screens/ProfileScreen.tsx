@@ -30,8 +30,8 @@ export default function ProfileScreen() {
 
   const handleLogout = async () => {
     await auth.signOut().then(() => {
-      dispatch(SET_USER_NULL());
       navigation.navigate(LOGIN_SCREEN);
+      dispatch(SET_USER_NULL());
     });
   };
   return (

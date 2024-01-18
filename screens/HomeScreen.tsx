@@ -77,20 +77,25 @@ export default function HomeScreen() {
 
   return (
     <View className='flex-1'>
-      <SafeAreaView>
+      <SafeAreaView className='bg-primary'>
         <View className='flex-row items-center justify-between w-full px-4 py-2'>
           <Image source={Logo} className='w-12 h-12' resizeMode='contain' />
-          <TouchableOpacity
-            onPress={() => navigation.navigate(PROFILE_SCREEN)}
-            className='flex items-center justify-center w-12 h-12 border rounded-full border-primary'>
-            <Image
-              source={{ uri: user?.profilePic }}
-              className='w-full h-full'
-              resizeMode='cover'
-            />
-          </TouchableOpacity>
+          <View className='flex-row items-center gap-3'>
+            <Text className='text-2xl font-semibold text-white capitalize'>
+              {user?.fullname}
+            </Text>
+            <TouchableOpacity
+              onPress={() => navigation.navigate(PROFILE_SCREEN)}
+              className='flex items-center justify-center w-12 h-12 border rounded-full border-primary'>
+              <Image
+                source={{ uri: user?.profilePic }}
+                className='w-full h-full'
+                resizeMode='cover'
+              />
+            </TouchableOpacity>
+          </View>
         </View>
-        <View className='flex-row items-center justify-between w-full px-2 pt-6'>
+        <View className='flex-row items-center justify-between w-full px-2 pt-6 bg-white'>
           <Text className='px-4 pb-2 text-base font-extrabold text-primaryText'>
             Messages
           </Text>
@@ -102,7 +107,7 @@ export default function HomeScreen() {
           </TouchableOpacity>
         </View>
 
-        <ScrollView className='w-full h-full px-4 pt-4'>
+        <ScrollView className='w-full h-full px-4 pt-4 bg-white'>
           {isLoading ? (
             <>
               <View className='flex items-center justify-center w-full mt-10'>

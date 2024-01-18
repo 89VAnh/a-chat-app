@@ -83,8 +83,8 @@ export default function SignUpScreen() {
 
       {isAvatarMenu && (
         <>
-          <View className='absolute inset-0 z-10'>
-            <ScrollView className='flex-1 w-full h-full'>
+          <View className='absolute z-10'>
+            <ScrollView>
               <BlurView
                 className='flex-row flex-wrap items-center px-4 py-16 justify-evenly'
                 tint='light'
